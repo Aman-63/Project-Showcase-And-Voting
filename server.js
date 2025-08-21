@@ -3,12 +3,16 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
+import auth from "./routes/loginSignup.js";
+
 dotenv.config();
 
 const exp= express();
 
 exp.use(cors());
 exp.use(express.json());
+
+exp.use("/api/auth", auth);
 
 mongoose.connect(process.env.connectionURL).then(() =>{
     console.log("MongoDB connected successfully!!");
