@@ -31,7 +31,8 @@ exp.post("/login", async(request, response) =>{
     if(!pswd){
         response.status(400).json({error: 'Invalid Credentials'});
     }
-    const token = jwt.sign({user: user._id}, process.env.jwtPass, {expiresIn:'1h'});
+    const token = jwt.sign({id: user._id, user:user.username}, process.env.jwtPass, {expiresIn:'1h'});
     response.json({token, user : {id: user._id, username: user.username}});
 });
 
+export default exp;
