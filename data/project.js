@@ -1,11 +1,10 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const projectInfo = new Mongoose.schema({
+const projectInfo = new mongoose.Schema({
     title:{type: String, required:true},
     description:{type: String, required: true},
     techStack:{type: String},
     imageUrl:{type: String, required:true},
-    videoUrl:{type: String, required:true},
     repoLink:{type: String, required:true},
     liveLink:{type: String},
     votes:{type:Number, default:0},

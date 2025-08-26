@@ -8,12 +8,12 @@ const exp= express.Router();
 dotenv.config();
 
 const authorization= (request, response, next)=> {
-    const token =request.headers["Authorization"]?.split(" ")[1];
+    const token =request.headers["authorization"]?.split(" ")[1];
     if(!token){
         return response.status(401).json({message:"You need to login first"});
     }
     try{
-        const check=jwt.verify(token, process.env.jwtPass);
+        const check=jwt.verify(token, process.env.JWT_PASS);
         request.user =check;
         next();
     } catch(err){
@@ -23,14 +23,13 @@ const authorization= (request, response, next)=> {
 
 
 exp.post("/submit", authorization, async(request, response) =>{
-    const {title, description, repoLink} = request.body;
+    const {title, description, techStack, imageUrl, repoLink, liveLink} = request.body;
     try{
         const newProject = await Project.create({
             title,
             description,
             techStack,
             imageUrl,
-            videoUrl,
             repoLink,
             liveLink,
             submittedBy:request.user.user
@@ -41,7 +40,7 @@ exp.post("/submit", authorization, async(request, response) =>{
     }
 });
 
-exp.post("/", async(request, response)=>{
+exp.get("/", async(request, response)=>{
     try{
         const projects= await Project.find();
         response.json(projects);
