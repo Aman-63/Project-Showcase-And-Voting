@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Submit a Project</title>
+
+  <!-- Optional: nice font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="submit.css">
+
+
+<body>
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1 class="title">Submit a Project</h1>
+        <p class="subtitle">Share your project with our community and let others vote on it.</p>
+      </div>
+
+      <!-- Right illustration (placeholder SVG) -->
+      <div class="art" aria-hidden="true">
+        <img src="c:\Users\HP\Downloads\82090863a2e8453b4a4705fe97bf0389bf7c8dab.png" >
+          <circle cx="150" cy="60" r="28" stroke="#6c86ff" stroke-width="4"/>
+          <path d="M60 120c0-22 18-40 40-40s40 18 40 40c0 11-5 21-12 28v8a8 8 0 0 1-8 8H80a8 8 0 0 1-8-8v-8c-7-7-12-17-12-28Z" stroke="#111827" stroke-width="6" />
+          <path d="M98 166h24" stroke="#6c86ff" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="46" cy="64" r="10" fill="#96d0a8"/>
+          <circle cx="28" cy="40" r="6" fill="#6dbb8a"/>
+          <circle cx="30" cy="88" r="6" fill="#6c86ff"/>
+        </svg>
+      </div>
+    </div>
+
+    <form>
+      <div class="field">
+        <label for="title">Project Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter your project title" />
+      </div>
+
+      <div class="field">
+        <label for="desc">Description</label>
+        <textarea id="desc" name="description" placeholder="Describe your project..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="github">Github Link</label>
+        <input type="url" id="github" name="github" placeholder="https://github.com/username/repo" />
+      </div>
+
+      <div class="actions">
+        <label class="btn btn-upload" for="thumb">
+          <!-- upload icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 16V7m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Upload Thumbnail
+        </label>
+        <input id="thumb" type="file" accept="image/*" hidden />
+
+        <button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

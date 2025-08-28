@@ -1,0 +1,66 @@
+*{
+    margin: 0%;
+    padding: 10px;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    font-family: "poppins", sans-serif;
+   overflow-x: hidden;
+}
+#main{
+    height: 100%;
+    width: 100%;
+    
+}
+#bigbox{
+height: 40%;
+width: 100%;
+display: flex;
+background-color: white;
+
+}
+.box{
+  height: 100%;
+  width: 50%;
+  background-color: white   ;
+  overflow: hidden;
+  object-fit: cover;
+
+}
+
+.box h2{
+    margin-top: 120px;
+    flex-direction: column;
+    font-size:50px;
+}
+.box p{
+    margin-top: 150px;
+    
+    
+}
+.box img{
+  height: 80%;
+  width: 70%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-left: 50px;
+  box-shadow: black 2px 2px 5px;
+}
+.contentbox{
+    height: 80px;
+  width: 50%;
+}
+
+.smallbox img{
+    height: 60%;
+    width: 90%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-top: 30px;
+    margin-left: 50px;
+    box-shadow: black 2px 2px 5px;
+}
