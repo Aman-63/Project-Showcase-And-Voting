@@ -10,7 +10,7 @@ dotenv.config();
 const exp= express.Router();
 
 exp.post("/signup", async(request, response) =>{
-    const {username, password, confirmPassword} =request.body;
+    const {username, scholarId, email, password, confirmPassword} =request.body;
     const exstngUser = await User.findOne({username});
     if(exstngUser){
         return response.status(400).json({error: "Username already exists"});
@@ -21,7 +21,7 @@ exp.post("/signup", async(request, response) =>{
     const encrypt= await bcrypt.hash(password,10);
     const newUser = new User({ username, password: encrypt });
     await newUser.save();
-    response.status(201).json("User registered successfully");
+    response.status(201).json({message: "User registered successfully..."});
 });
 
 exp.post("/login", async(request, response) =>{
