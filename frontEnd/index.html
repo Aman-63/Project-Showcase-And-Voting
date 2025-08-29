@@ -14,70 +14,74 @@
 </head>
 
 <body>
-  <div id="main">
-    <nav id="navbar">
-      <div id="navitems"> <span onclick="navigate('index.html')">Home</span>
-        <span onclick="navigate('leaderboard.html')">Leaderboard</span>
-        <span onclick="navigate('about.html')">About</span>
-        <span onclick="navigate('login.html')">Login</span>
-      </div>
-
-    </nav>
-    <div class="container">
-      <div class="box">
-        <h1>Discover & Vote for Projects</h1>
-        <p>Browse and discover the innovative projects submitted by our community</p>
-        <div id="submitbox">
-          <p onclick="navigate('submit.html')">Submit your project </p>
+    <div id="main">
+            <nav id="navbar"> 
+           <div id="navitems"> <span onclick="navigate('index.html')">Home</span>
+            <span onclick="navigate('leaderboard.html')">Leaderboard</span>
+            <span onclick="navigate('about.html')">About</span>
+            <span onclick="navigate('login.html')">Login</span></div>
+            
+        </nav>
+        <div class="container">
+        <div class="box"><h1>Discover & Vote for Projects</h1>
+            <p>Browse and discover the innovative projects submitted by our community</p>
+            <div id="submitbox">
+                <p onclick="navigate('submit.html')">submit your project </p>
+            </div>
         </div>
-      </div>
-      <div class="box1"><img src="c:\Users\HP\Downloads\40d4e95e7c18b99c73272feb3e35ae8d688e3f5a.png"></div>
+        <div class="box1"><img src="image/40d4e95e7c18b99c73272feb3e35ae8d688e3f5a.png"></div>
+        
+        </div>
+        <div id="feature"><h1>Our Featured Projects</h1></div>
+         <div class="projects-container">
 
+  <!-- Project 1 -->
+  <div class="project-card">
+    <div class="project-img"></div>
+    <h3>Project 1</h3>
+   
+    <div class="tags">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
     </div>
-    <div id="feature">
-      <h1>Our Featured Projects</h1>
+    <div id="vote">
+            <button>vote</button>
+          </div>
+  
+
+
+      </div>
+
+  <!-- Project 2 -->
+  <div class="project-card">
+    <div class="project-img"></div>
+    <h3>Project 2</h3>
+   
+    <div class="tags">
+      <span>React</span>
+      <span>Node.js</span>
     </div>
-    <div class="projects-container">
-
-      <!-- Project 1 -->
-      <div class="project-card">
-        <div class="project-img"></div>
-        <h3>Project 1</h3>
-        <p>Project description goes here.</p>
-        <div class="tags">
-          <span>HTML</span>
-          <span>CSS</span>
-          <span>JavaScript</span>
-        </div>
+    <div id="vote">
+            <button>vote</button>
+          </div>
+ 
 
 
-
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card">
-        <div class="project-img"></div>
-        <h3>Project 2</h3>
-        <p>Another project description.</p>
-        <div class="tags">
-          <span>React</span>
-          <span>Node.js</span>
-        </div>
-
-
-
-      </div>
-      <!-- Project 3 -->
-      <div class="project-card">
-        <div class="project-img"></div>
-        <h3>Project 3</h3>
-        <p>Another project description.</p>
-        <div class="tags">
-          <span>React</span>
-          <span>Node.js</span>
-        </div>
-
-      </div>
+</div>
+<!-- Project 3 -->
+  <div class="project-card">
+    <div class="project-img"></div>
+    <h3>Project 3</h3>
+    
+    <div class="tags">
+      <span>React</span>
+      <span>Node.js</span>
+    </div>
+ <div id="vote">
+            <button>vote</button>
+          </div>
+</div>
     </div>
   </div>
   <script src="script.js"></script>

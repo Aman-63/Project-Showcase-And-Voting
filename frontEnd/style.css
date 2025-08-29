@@ -164,6 +164,7 @@ cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 /* margin-bottom: 20px; */
 margin-right: 50px;
+position: relative;
 }
 
 .project-img {
@@ -220,4 +221,18 @@ align-items: center;
 
 .view-btn:hover {
   background: #2563eb;
+}
+#vote button{
+  height: 30px;
+  width: 50px;
+  background: #7b9eea;
+  border-radius: 20px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-family: "poppins", sans-serif;
+cursor: pointer;
+}
+#vote button:hover{
+  background: #4f82f0;
 }
