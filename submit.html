@@ -9,6 +9,80 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="submit.css">
 
+  <style>
+    :root{
+      --btn-blue:#6c86ff;
+      --btn-blue-hover:#5b74f2;
+    }
+
+    /* Floating Instructions Modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: none; /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      max-width: 600px;
+      width: 90%;
+      text-align: left;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: popup 0.3s ease;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .modal-content ul {
+      padding-left: 20px;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: var(--btn-blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .close-btn:hover {
+      background: var(--btn-blue-hover);
+    }
+
+    @keyframes popup {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Instruction button */
+    .btn-instruction {
+      margin-top: 12px;
+      background: #f3f4f6;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-instruction:hover {
+      background: #e5e7eb;
+    }
+  </style>
+</head>
 
 <body>
   <div class="card">
@@ -16,51 +90,88 @@
       <div>
         <h1 class="title">Submit a Project</h1>
         <p class="subtitle">Share your project with our community and let others vote on it.</p>
+
+        <!-- Instruction button under subtitle -->
+        <button type="button" class="btn-instruction" id="openInstructions">📘 Instructions</button>
       </div>
 
-      <!-- Right illustration (placeholder SVG) -->
-      <div class="art" aria-hidden="true">
-        <img src="c:\Users\HP\Downloads\82090863a2e8453b4a4705fe97bf0389bf7c8dab.png" >
-          <circle cx="150" cy="60" r="28" stroke="#6c86ff" stroke-width="4"/>
-          <path d="M60 120c0-22 18-40 40-40s40 18 40 40c0 11-5 21-12 28v8a8 8 0 0 1-8 8H80a8 8 0 0 1-8-8v-8c-7-7-12-17-12-28Z" stroke="#111827" stroke-width="6" />
-          <path d="M98 166h24" stroke="#6c86ff" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="46" cy="64" r="10" fill="#96d0a8"/>
-          <circle cx="28" cy="40" r="6" fill="#6dbb8a"/>
-          <circle cx="30" cy="88" r="6" fill="#6c86ff"/>
-        </svg>
+      <div class="art">
+        <img src="image/82090863a2e8453b4a4705fe97bf0389bf7c8dab.png">
       </div>
     </div>
 
-    <form>
+    <form id="projectForm">
       <div class="field">
         <label for="title">Project Title</label>
-        <input type="text" id="title" name="title" placeholder="Enter your project title" />
+        <input type="text" id="title" name="title" placeholder="Enter your project title" required />
       </div>
 
       <div class="field">
         <label for="desc">Description</label>
-        <textarea id="desc" name="description" placeholder="Describe your project..."></textarea>
+        <textarea id="desc" name="description" placeholder="Describe your project..." required></textarea>
       </div>
 
       <div class="field">
         <label for="github">Github Link</label>
         <input type="url" id="github" name="github" placeholder="https://github.com/username/repo" />
       </div>
-
-      <div class="actions">
-        <label class="btn btn-upload" for="thumb">
-          <!-- upload icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M12 16V7m0 0-4 4m4-4 4 4M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Upload Thumbnail
-        </label>
-        <input id="thumb" type="file" accept="image/*" hidden />
-
-        <button type="submit" class="btn btn-submit">Submit</button>
+      
+      <div class="field">
+        <label for="live_link">Live link</label>
+        <input type="url" id="live_link" name="livelink" placeholder="https://yourproject.com" />
       </div>
+      
+      <div class="field">
+        <label for="techstack">Techstack</label>
+        <input type="text" id="tech_stack" name="techstack" placeholder="HTML, CSS, JS" />
+      </div>
+      
+      <div class="field">
+        <label for="imglink">Image link</label>
+        <input type="url" name="thumb" placeholder="provide your image url" />
+      </div>
+
+      <button type="submit" class="btn btn-submit">Submit</button>
     </form>
   </div>
 
+  <!-- Floating Instructions Modal -->
+  <div class="modal" id="instructionModal">
+    <div class="modal-content">
+      <h2>📌 Project Submission Instructions</h2>
+      <ul>
+        <li>Enter a clear and descriptive project title.</li>
+        <li>Provide a detailed description of your project idea.</li>
+        <li>Add your GitHub repository link (if available).</li>
+        <li>Include a live demo link (optional but recommended).</li>
+        <li>Mention all technologies used (e.g., HTML, CSS, JS, React).</li>
+        <li>Provide an image/thumbnail link of your project.</li>
+      </ul>
+      <button class="close-btn" id="closeInstructions">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById("openInstructions");
+    const modal = document.getElementById("instructionModal");
+    const closeBtn = document.getElementById("closeInstructions");
+
+    // Open modal on click
+    openBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+
+    // Close modal on button click
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    // Close modal if clicked outside
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
