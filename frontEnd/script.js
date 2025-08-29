@@ -15,27 +15,29 @@ async function submitProject() {
   if (!tkn) {
     return alert("You must login first");
   }
-  const titleData= document.getElementById("title").value;
-  const descData= document.getElementById("desc").value;
-  const techData= document.getElementById("tech_stack").value;
-  const imageData= document.getElementById("thumb").value;
-  const repoData=document.getElementById("github").value;
-  const linkData=document.getElementById("live_link").value;
+  const title = document.getElementById("title").value;
+  const description = document.getElementById("desc").value;
+  const techData = document.getElementById("tech_stack").value;
+  const imageUrl = document.getElementById("thumb").value;
+  const repoLink = document.getElementById("github").value;
+  const liveLink = document.getElementById("live_link").value;
 
-  const techStack= techData.split(",").map(t=> t.trim());
-
+ const techStack = techData
+    ? techData.split(",").map(t => t.trim()).filter(Boolean)
+    : [];
   const res = await fetch("http://localhost:5000/api/project/submit", {
     method: "POST",
-    headers: { "Content-Type": "application/json",
+    headers: {
+      "Content-Type": "application/json",
       "authorization": `Bearer ${tkn}`
-     },
+    },
     body: JSON.stringify({
-      titleData,
-      descData,
+      title,
+      description,
       techStack,
-      imageData,
-      repoData,
-      linkData
+      imageUrl,
+      repoLink,
+      liveLink
     }),
   });
   const data = await res.json();
@@ -43,14 +45,16 @@ async function submitProject() {
 
 }
 
-async function voteProject(projectId){
+async function voteProject(projectId, e) {
+  if(e) e.stopPropagation();
   const tkn = localStorage.getItem("token");
-  if(!tkn){
+  if (!tkn) {
     alert("You need to login first")
   }
-  const res= await fetch(`http://localhost:5000/api/vote/castVote/${projectId}`, {
-    method:"POST",
-    headers:{"Content-Type": "application/json",
+  const res = await fetch(`http://localhost:5000/api/vote/castVote/${projectId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
       "authorization": `Bearer ${tkn}`
     }
   });
@@ -59,14 +63,48 @@ async function voteProject(projectId){
 
 }
 
-async function loadProject(){
-  const res= await fetch("http://localhost:5000/api/project/",{
-    method:"POST",
-    headers:{
-      "Content-Type": "application/json"
-    }
-  });
-  const projects= await res.json();
-  
+async function loadProject() {
+  try {
+    const res = await fetch("http://localhost:5000/api/project/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const projects = await res.json();
+    const ls = document.getElementById("main");
+    projects.forEach(proj => {
+      const div = document.createElement("div");
+      div.classList.add("project-card");
+      div.addEventListener("click",)
+      div.innerHTML = `
+    <div class="project-img"></div>
+    <div class="tags">
+       ${(Array.isArray(proj.techStack) ? proj.techStack : []).map(t => `<span>${t}</span>`).join(" ")}
+    </div>
+    <div id="vote">
+    <button class="vote-btn">Vote</button></div>
+
+    `;
+      div.addEventListener("click", () => {
+        if (proj.liveLink) window.open(proj.liveLink, "_blank");
+      });
+
+      const btn=div.querySelector(".vote-btn");
+      btn.addEventListener("click", (e)=> voteProject(proj._id, e));
+
+      ls.appendChild(div);
+
+    });
+
+  } catch (err) {
+    alert("Error loading projects....")
+  }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("main")) {
+    loadProject();
+  }
+});
 
