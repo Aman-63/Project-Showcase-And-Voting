@@ -85,7 +85,7 @@ a {
   margin-bottom: 15px;
 }
 
-.btn-primary {
+#btn-primary {
   background: #3b82f6;
   color: #fff;
   border: none;
@@ -95,7 +95,7 @@ a {
   font-size: 16px;
 }
 
-.btn-primary:hover {
+#btn-primary:hover {
   background: #2563eb;
 }
 

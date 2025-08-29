@@ -1,11 +1,10 @@
 document.getElementById("btn-primary").addEventListener("click", async function (e) {
-    e.preventDefault(); // stop page refresh
+    e.preventDefault(); 
 
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
     const message = document.getElementById("message");
 
-    // validation before API call
     if (!usernameInput.value && !passwordInput.value) {
         alert("Please enter username and password");
         return;
@@ -29,17 +28,17 @@ document.getElementById("btn-primary").addEventListener("click", async function 
 
         const data = await res.json();
 
-        if (res.ok) {
-            message.style.color = "green";
-            message.textContent = "Login successful";
-            console.log("response", data);
-        } else {
-            message.style.color = "red";
-            message.textContent = data.error || "Login failed";
+        if(data.token){
+            localStorage.setItem("token", data.token);
+            alert("Login successful....");
+        }
+        else{
+            this.lang
+            alert(data.error || "Login failed...");
         }
     } catch (error) {
         console.error(error);
         message.style.color = "red";
-        message.textContent = "Login failed";
+        message.textContent = "Login failed...";
     }
 });
