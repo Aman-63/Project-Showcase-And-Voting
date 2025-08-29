@@ -4,7 +4,6 @@ function navigate(page) {
 
 
 const form = document.getElementById("submitbox");
-
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   navigate("project.html");
@@ -69,4 +68,32 @@ async function loadProject(){
   const projects= await res.json();
   
 }
+async function loadleaderboard(){
+  const res = await fetch("http://localhost:5000/api/vote/leaderboard",{
+    method:"GET",
+    headers:{"content-type":"application/json"}
+  });
+  const projects = await res.json();
+  projects.sort((a,b)=>b.votes - a.votes);
+const topcards = document.querySelectorAll(".top-cards .card");
+projects.slice(0,3).forEach((project, index) => {
+  const card = topcards[index];
+  card.querySelector("h3").innerText = project.title;
+  card.querySelector(".likes").innerText = `${project.votes} votes`;
+});
 
+  const tbody = document.querySelector("table-container");
+  tbody.innerHTML = "";
+  projects.slice(3).forEach((proj, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${idx + 4}</td>
+      <td>${proj.title}</td>
+      <td>${proj.votes}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+
+window.onload = loadleaderboard;
