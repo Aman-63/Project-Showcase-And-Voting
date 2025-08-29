@@ -33,7 +33,6 @@ document.getElementById("btn-primary").addEventListener("click", async function 
             alert("Login successful....");
         }
         else{
-            this.lang
             alert(data.error || "Login failed...");
         }
     } catch (error) {

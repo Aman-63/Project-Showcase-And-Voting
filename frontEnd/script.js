@@ -1,30 +1,72 @@
+function navigate(page) {
+  window.location.href = page;
+}
 
-    const form = document.getElementById("submitbox");
-    function navigate(page) {
-            window.location.href = page;
-        }
-    form.addEventListener("submit", function(event) {
-      event.preventDefault(); 
-      navigate("project.html");
-    });
+
+const form = document.getElementById("submitbox");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  navigate("project.html");
+});
+
 async function submitProject() {
-  try {
-    const response = await fetch("/api/vote/routes/projectSubmission.js", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title: "Smart Dustbin",
-        description: "Arduino-based project",
-        techStack: ["Arduino", "C++"]
-      })
-    }); 
-
-    const data = await response.json();
-    console.log("Project submission response:", data);
-  } catch (error) {
-    console.error("Error:", error);
+  const tkn = localStorage.getItem("token");
+  if (!tkn) {
+    return alert("You must login first");
   }
+  const titleData= document.getElementById("title").value;
+  const descData= document.getElementById("desc").value;
+  const techData= document.getElementById("tech_stack").value;
+  const imageData= document.getElementById("thumb").value;
+  const repoData=document.getElementById("github").value;
+  const linkData=document.getElementById("live_link").value;
+
+  const techStack= techData.split(",").map(t=> t.trim());
+
+  const res = await fetch("http://localhost:5000/api/project/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json",
+      "authorization": `Bearer ${tkn}`
+     },
+    body: JSON.stringify({
+      titleData,
+      descData,
+      techStack,
+      imageData,
+      repoData,
+      linkData
+    }),
+  });
+  const data = await res.json();
+  alert(data.message || "Project submitted successfully")
+
+}
+
+async function voteProject(projectId){
+  const tkn = localStorage.getItem("token");
+  if(!tkn){
+    alert("You need to login first")
+  }
+  const res= await fetch(`http://localhost:5000/api/vote/castVote/${projectId}`, {
+    method:"POST",
+    headers:{"Content-Type": "application/json",
+      "authorization": `Bearer ${tkn}`
+    }
+  });
+  const data = await res.json();
+  alert(data.message || "Voted successfully");
+
+}
+
+async function loadProject(){
+  const res= await fetch("http://localhost:5000/api/project/",{
+    method:"POST",
+    headers:{
+      "Content-Type": "application/json"
+    }
+  });
+  const projects= await res.json();
+  
 }
 
