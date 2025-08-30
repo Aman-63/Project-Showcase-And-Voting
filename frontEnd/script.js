@@ -80,7 +80,7 @@ projects.forEach(proj => {
   const imgWrap = document.createElement("div");
   imgWrap.className = "project-img";
   const img = document.createElement("img");
-  img.src = proj.imageUrl || "image/default-thumb.png"; // fallback
+  img.src = proj.imageUrl 
   img.alt = proj.title || "project thumbnail";
   imgWrap.appendChild(img);
 
