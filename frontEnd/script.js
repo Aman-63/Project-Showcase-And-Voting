@@ -121,7 +121,7 @@ projects.forEach(proj => {
     alert("Error loading projects....")
   }
 }
-async function loadleaderboard(){
+async function loadLeaderboard(){
   const res = await fetch("/api/vote/leaderboard",{
     method:"GET",
     headers:{"Content-Type":"application/json"}
