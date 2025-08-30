@@ -235,12 +235,12 @@ cursor: pointer;
 #vote button:hover{
   background: #4f82f0;
 }
-@media(min-width: 1300px){
+@media(max-width: 1500px){
   #navbar{
     padding: 15px;
   }
   #navitems{
-    margin-left: 900px;
+    margin-left: 800px;
   }
   .box{
     width: 30%;

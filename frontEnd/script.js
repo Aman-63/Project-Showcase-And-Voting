@@ -101,9 +101,9 @@ async function loadProject() {
   }
 }
 async function loadleaderboard(){
-  const res = await fetch("http://localhost:5000/api/vote/leaderboard",{
+  const res = await fetch("/api/vote/leaderboard",{
     method:"GET",
-    headers:{"content-type":"application/json"}
+    headers:{"Content-Type":"application/json"}
   });
   const projects = await res.json();
   projects.sort((a,b)=>b.votes - a.votes);
@@ -111,11 +111,11 @@ const topcards = document.querySelectorAll(".top-cards .card");
 projects.slice(0,3).forEach((project, index) => {
   const card = topcards[index];
   card.querySelector("h3").innerText = project.title;
-  card.querySelector(".likes").innerText = `${project.votes} votes`;
+  card.querySelector(".points").innerText = `${project.votes} votes`;
 });
 
 
-  const tbody = document.querySelector("table-container");
+  const tbody = document.querySelector("table tbody");
   tbody.innerHTML = "";
   projects.slice(3).forEach((proj, idx) => {
     const tr = document.createElement("tr");
