@@ -36,12 +36,15 @@ exp.post("/castVote/:projectId", authorization, async (request, response) =>{
             return response.status(400).json({message: "You already voted for this project.."})
         }
 
-        user.votedData.push(projectId);
-        await user.save();
+        
         
         const project = await Project.findById(projectId);
+        if (!project) return res.status(404).json({ message: "Project not found" });
         project.votes+=1;
         await project.save();
+
+        user.votedData.push(projectId);
+        await user.save();
 
         response.json({message:"Voted successfully..."});
 
@@ -49,6 +52,17 @@ exp.post("/castVote/:projectId", authorization, async (request, response) =>{
         response.status(500).json({message:"Error while voting"});
     }
 });
+
+exp.get("/leaderboard", async (req, res) => {
+  try {
+    const projects = await Project.find().sort({ votes: -1 }).lean();
+    res.json(projects);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error loading leaderboard" });
+  }
+});
+
 
 
 export default exp;

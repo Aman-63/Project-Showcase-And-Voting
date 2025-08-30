@@ -3,7 +3,7 @@ document.getElementById("btn-primary").addEventListener("click", async function 
 
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
-    const message = document.getElementById("message");
+    const message = document.getElementById("loginmessage");
 
     if (!usernameInput.value && !passwordInput.value) {
         alert("Please enter username and password");
