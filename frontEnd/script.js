@@ -20,7 +20,7 @@ async function submitProject() {
  const techStack = techData
     ? techData.split(",").map(t => t.trim()).filter(Boolean)
     : [];
-  const res = await fetch("http://localhost:5000/api/project/submit", {
+  const res = await fetch("/api/project/submit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,7 +47,7 @@ async function voteProject(projectId, e) {
     alert("You need to login first");
     return;
   }
-  const res = await fetch(`http://localhost:5000/api/vote/castVote/${projectId}`, {
+  const res = await fetch(`/api/vote/castVote/${projectId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ async function voteProject(projectId, e) {
 
 async function loadProject() {
   try {
-    const res = await fetch("http://localhost:5000/api/project/", {
+    const res = await fetch("/api/project/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
