@@ -137,7 +137,7 @@ projects.slice(0,3).forEach((project, index) => {
 
 
   const tbody = document.querySelector("table tbody");
-  const tbody = document.querySelector(".table-container");
+
 
   tbody.innerHTML = "";
   projects.slice(3).forEach((proj, idx) => {
