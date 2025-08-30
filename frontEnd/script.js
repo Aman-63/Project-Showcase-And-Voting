@@ -96,7 +96,7 @@ projects.forEach(proj => {
   });
 
   const voteDiv = document.createElement("div");
-  voteDiv.className = "vote";
+  voteDiv.id = "vote";
   const btn = document.createElement("button");
   btn.className = "vote-btn";
   btn.textContent = "Vote";
