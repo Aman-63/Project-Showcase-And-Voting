@@ -5,9 +5,13 @@ document.getElementById("btn-primary").addEventListener("click", async function 
     const emailInput = document.getElementById("email").value;
     const passwordInput = document.getElementById("pswd").value;
     const cnfPasswordInput = document.getElementById("cnfPswd").value;
+    if (passwordInput !== cnfPasswordInput) {
+      alert("Passwords do not match");
+      return;
+    }
 
-
-    const res = await fetch("http://localhost:5000/api/auth/signup", {
+    try{
+    const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -20,6 +24,9 @@ document.getElementById("btn-primary").addEventListener("click", async function 
     });
 
     const data = await res.json();
-    alert(data.message || data.error || "User registered successfully...");
+    alert(data.message || data.error || "User registered successfully");
+}catch(err){
+    console.error(err);
+}
 
 })

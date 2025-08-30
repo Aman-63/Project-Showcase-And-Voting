@@ -3,7 +3,7 @@ document.getElementById("btn-primary").addEventListener("click", async function 
 
     const usernameInput = document.getElementById("username");
     const passwordInput = document.getElementById("password");
-    const message = document.getElementById("message");
+    const message = document.getElementById("loginmessage");
 
     if (!usernameInput.value && !passwordInput.value) {
         alert("Please enter username and password");
@@ -17,7 +17,7 @@ document.getElementById("btn-primary").addEventListener("click", async function 
     }
 
     try {
-        const res = await fetch("http://localhost:5000/api/auth/login", {
+        const res = await fetch("/api/auth/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -31,6 +31,7 @@ document.getElementById("btn-primary").addEventListener("click", async function 
         if(data.token){
             localStorage.setItem("token", data.token);
             alert("Login successful....");
+            window.location.href="index.html";
         }
         else{
             alert(data.error || "Login failed...");

@@ -3,11 +3,7 @@ function navigate(page) {
 }
 
 
-const form = document.getElementById("submitbox");
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  navigate("project.html");
-});
+
 
 async function submitProject() {
   const tkn = localStorage.getItem("token");
@@ -24,7 +20,7 @@ async function submitProject() {
  const techStack = techData
     ? techData.split(",").map(t => t.trim()).filter(Boolean)
     : [];
-  const res = await fetch("http://localhost:5000/api/project/submit", {
+  const res = await fetch("/api/project/submit", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,9 +44,10 @@ async function voteProject(projectId, e) {
   if(e) e.stopPropagation();
   const tkn = localStorage.getItem("token");
   if (!tkn) {
-    alert("You need to login first")
+    alert("You need to login first");
+    return;
   }
-  const res = await fetch(`http://localhost:5000/api/vote/castVote/${projectId}`, {
+  const res = await fetch(`/api/vote/castVote/${projectId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -64,37 +61,61 @@ async function voteProject(projectId, e) {
 
 async function loadProject() {
   try {
-    const res = await fetch("http://localhost:5000/api/project/", {
+    const res = await fetch("/api/project/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
       }
     });
     const projects = await res.json();
-    const ls = document.getElementById("main");
-    projects.forEach(proj => {
-      const div = document.createElement("div");
-      div.classList.add("project-card");
-      div.addEventListener("click",)
-      div.innerHTML = `
-    <div class="project-img"></div>
-    <div class="tags">
-       ${(Array.isArray(proj.techStack) ? proj.techStack : []).map(t => `<span>${t}</span>`).join(" ")}
-    </div>
-    <div id="vote">
-    <button class="vote-btn">Vote</button></div>
 
-    `;
-      div.addEventListener("click", () => {
-        if (proj.liveLink) window.open(proj.liveLink, "_blank");
-      });
+const projectsContainer = document.querySelector(".projects-container");
+if (!projectsContainer) return;
 
-      const btn=div.querySelector(".vote-btn");
-      btn.addEventListener("click", (e)=> voteProject(proj._id, e));
+projects.forEach(proj => {
+  const div = document.createElement("div");
+  div.classList.add("project-card");
 
-      ls.appendChild(div);
+  // image
+  const imgWrap = document.createElement("div");
+  imgWrap.className = "project-img";
+  const img = document.createElement("img");
+  img.src = proj.imageUrl || "image/default-thumb.png"; // fallback
+  img.alt = proj.title || "project thumbnail";
+  imgWrap.appendChild(img);
 
-    });
+  const h3 = document.createElement("h3");
+  h3.textContent = proj.title;
+
+  const tagsDiv = document.createElement("div");
+  tagsDiv.className = "tags";
+  (Array.isArray(proj.techStack) ? proj.techStack : []).forEach(t => {
+    const span = document.createElement("span");
+    span.textContent = t;
+    tagsDiv.appendChild(span);
+  });
+
+  const voteDiv = document.createElement("div");
+  voteDiv.id = "vote";
+  const btn = document.createElement("button");
+  btn.className = "vote-btn";
+  btn.textContent = "Vote";
+  btn.addEventListener("click", (e) => voteProject(proj._id, e));
+  voteDiv.appendChild(btn);
+
+  div.appendChild(imgWrap);
+  div.appendChild(h3);
+  div.appendChild(tagsDiv);
+  div.appendChild(voteDiv);
+
+  div.addEventListener("click", () => {
+    if (proj.liveLink) window.open(proj.liveLink, "_blank");
+  });
+
+  projectsContainer.appendChild(div);
+});
+
+
 
   } catch (err) {
     alert("Error loading projects....")
@@ -116,6 +137,8 @@ projects.slice(0,3).forEach((project, index) => {
 
 
   const tbody = document.querySelector("table tbody");
+  const tbody = document.querySelector(".table-container");
+
   tbody.innerHTML = "";
   projects.slice(3).forEach((proj, idx) => {
     const tr = document.createElement("tr");
@@ -129,7 +152,7 @@ projects.slice(0,3).forEach((project, index) => {
 }
 
 
-window.onload = loadleaderboard;
+
 document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("main")) {
     loadProject();
