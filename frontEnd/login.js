@@ -31,6 +31,7 @@ document.getElementById("btn-primary").addEventListener("click", async function 
         if(data.token){
             localStorage.setItem("token", data.token);
             alert("Login successful....");
+            window.location.href="index.html";
         }
         else{
             alert(data.error || "Login failed...");
