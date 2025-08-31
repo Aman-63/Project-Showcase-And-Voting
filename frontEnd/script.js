@@ -80,7 +80,7 @@ projects.forEach(proj => {
   const imgWrap = document.createElement("div");
   imgWrap.className = "project-img";
   const img = document.createElement("img");
-  img.src = proj.imageUrl 
+  img.src = "image/WhatsApp Image 2025-08-31 at 13.51.35_63081aa6.jpg"
   img.alt = proj.title || "project thumbnail";
   imgWrap.appendChild(img);
 
