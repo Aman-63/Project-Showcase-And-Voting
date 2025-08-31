@@ -50,6 +50,7 @@ background-color: white;
   box-shadow: black 2px 2px 5px;
 }
 .contentbox{
+  margin-top: 20px;
     height: 80px;
   width: 50%;
 }
@@ -64,7 +65,43 @@ background-color: white;
     object-fit: cover;
     overflow: hidden;
     border-radius: 20px;
-    margin-top: 30px;
+    margin-top: 50px;
     margin-left: 50px;
     box-shadow: black 2px 2px 5px;
+}
+@media(max-width:1000px){
+  #bigbox{
+    flex-direction: column;
+    height: auto;
+  }
+  .box{
+    width: 100%;
+    height: auto;
+  }
+  .box img{
+    width: 90%;
+    height: auto;
+    margin-left: 20px;
+  }
+  .box img{
+  height: 80%;
+  width: 70%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 30px;
+  margin-left: 50px;
+  box-shadow: black 2px 2px 5px;
+}
+.contentbox{
+font-size: medium;
+height: auto;
+width: auto;
+}
+.smallbox img{
+  
+    width: 90%;
+    height: auto;
+    margin-left: 20px;
+}
 }
