@@ -83,7 +83,7 @@ projects.forEach(proj => {
   const imgWrap = document.createElement("div");
   imgWrap.className = "project-img";
   const img = document.createElement("img");
-  img.src = proj.imageUrl || "image/default-thumb.png"; // fallback
+  img.src = "image/WhatsApp Image 2025-08-31 at 13.51.35_63081aa6.jpg"
   img.alt = proj.title || "project thumbnail";
   imgWrap.appendChild(img);
 
@@ -124,7 +124,7 @@ projects.forEach(proj => {
     alert("Error loading projects....")
   }
 }
-async function loadleaderboard(){
+async function loadLeaderboard(){
   const res = await fetch("/api/vote/leaderboard",{
     method:"GET",
     headers:{"Content-Type":"application/json"}
@@ -135,7 +135,7 @@ const topcards = document.querySelectorAll(".top-cards .card");
 projects.slice(0,3).forEach((project, index) => {
   const card = topcards[index];
   card.querySelector("h3").innerText = project.title;
-  card.querySelector(".points").innerText = `${project.votes} votes`;
+  card.querySelector(".points").innerText = `${project.votes} Votes`;
 });
 
 
