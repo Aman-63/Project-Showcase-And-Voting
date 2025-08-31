@@ -117,9 +117,14 @@ a {
 
 @media (max-width: 768px) {
   .auth-container {
+  
     flex-direction: column;
   }
   .auth-img {
     display: none;
+  }
+  .auth-container1{
+    width: 300px;
+  height: 700px;
   }
 }

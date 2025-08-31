@@ -2,7 +2,10 @@ function navigate(page) {
   window.location.href = page;
 }
 
-
+function toggleNav() {
+  const nav = document.getElementById("navitems");
+  nav.classList.toggle("show");
+}
 
 
 async function submitProject() {
