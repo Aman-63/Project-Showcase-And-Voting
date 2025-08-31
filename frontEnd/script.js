@@ -132,7 +132,7 @@ const topcards = document.querySelectorAll(".top-cards .card");
 projects.slice(0,3).forEach((project, index) => {
   const card = topcards[index];
   card.querySelector("h3").innerText = project.title;
-  card.querySelector(".points").innerText = `${project.votes} votes`;
+  card.querySelector(".points").innerText = `${project.votes} Votes`;
 });
 
 
