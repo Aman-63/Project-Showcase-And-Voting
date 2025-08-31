@@ -187,7 +187,9 @@ object-fit: cover;
 }
 
 .tags {
-  margin: 10px 0;
+  margin: 10px ;
+  display: flex;
+  gap: 8px;
 }
 
 .tags span {
